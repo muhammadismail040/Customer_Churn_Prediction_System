@@ -487,7 +487,7 @@ https://github.com/muhammadismail040
 
 **LinkedIn**
 
-(Add your LinkedIn Profile)
+https://www.linkedin.com/in/muhammad-ismail-913ab6322/
 
 ---
 
