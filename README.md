@@ -1,61 +1,52 @@
 # Customer Churn Prediction & Recommendation System
 
-An end-to-end Machine Learning project that predicts customer churn, segments customers into meaningful groups, and generates personalized retention recommendations. The project follows a production-ready workflow from data preprocessing to deployment using FastAPI and Docker.
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-REST_API-green)
+![Scikit--Learn](https://img.shields.io/badge/Scikit--Learn-Machine_Learning-orange)
+![Status](https://img.shields.io/badge/Status-In_Progress-yellow)
 
 ---
 
 # Project Overview
 
-Customer churn is a major challenge for subscription-based businesses such as telecom companies. Predicting which customers are likely to leave enables organizations to take proactive actions that improve customer retention.
+Customer churn is one of the biggest challenges faced by subscription-based businesses such as telecom companies. This project develops an end-to-end Machine Learning solution capable of predicting customer churn, segmenting customers into meaningful groups, generating personalized retention recommendations, and exposing predictions through a production-ready REST API.
 
-This project aims to:
-
-- Predict customer churn using Machine Learning
-- Segment customers based on their behavior
-- Generate personalized retention recommendations
-- Expose predictions through a REST API
-- Build an interactive dashboard
-- Deploy the solution using Docker
+The project follows a complete Machine Learning workflow from raw data preprocessing to model deployment and is being developed as part of a **Machine Learning Engineering Internship**.
 
 ---
 
-# Objectives
+# Project Objectives
 
-- Build an end-to-end Machine Learning pipeline
-- Perform Data Cleaning and Exploratory Data Analysis
-- Engineer meaningful features
-- Segment customers using K-Means Clustering
-- Train and compare multiple Machine Learning models
+- Predict customer churn using Machine Learning
+- Segment customers based on behavioral patterns
+- Generate personalized customer retention recommendations
+- Compare multiple Machine Learning models
 - Select the best-performing model
-- Develop a Recommendation Engine
-- Build REST APIs using FastAPI
-- Create an interactive Dashboard
-- Containerize the project using Docker
-- Deploy the complete application
+- Build a production-ready REST API using FastAPI
+- Provide interactive API documentation
+- Build an interactive dashboard
+- Deploy the project using Docker and Cloud services
 
 ---
 
 # Dataset
 
-**Dataset Name**
+### Dataset Name
 
-Telco Customer Churn Dataset
+**Telco Customer Churn Dataset**
 
-**Source**
+### Source
 
 IBM Sample Dataset (Kaggle)
 
-**Dataset Size**
+### Dataset Summary
 
-- 7,043 Customers
-- 21 Original Features
-- Binary Target Variable (Churn)
+- Total Customers: **7,043**
+- Original Features: **21**
+- Features Used: **20**
+- Target Variable: **Churn**
 
-**Target Variable**
-
-```
-Churn
-```
+Target Classes
 
 - Yes
 - No
@@ -64,7 +55,7 @@ Churn
 
 # Technologies Used
 
-## Programming Language
+## Programming
 
 - Python 3.12
 
@@ -73,7 +64,7 @@ Churn
 - Pandas
 - NumPy
 
-## Data Visualization
+## Visualization
 
 - Matplotlib
 - Seaborn
@@ -81,7 +72,7 @@ Churn
 
 ## Machine Learning
 
-- Scikit-learn
+- Scikit-Learn
 - XGBoost
 - LightGBM
 - CatBoost
@@ -90,6 +81,11 @@ Churn
 
 - FastAPI
 - Uvicorn
+- Pydantic
+
+## Model Serialization
+
+- Joblib
 
 ## Database
 
@@ -111,38 +107,58 @@ Churn
 
 # Project Structure
 
-```
+```text
 Customer_Churn_Prediction_System/
-│
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── final/
-│
-├── notebook/
-│
-├── src/
-│   ├── preprocessing/
-│   ├── segmentation/
-│   ├── models/
-│   ├── recommendation/
-│   ├── api/
-│   └── utils/
 │
 ├── dashboard/
 │
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── docs/
+│   ├── API_Documentation.md
+│   └── EDA_Report.md
+│
 ├── models/
-│   ├── preprocessing/
-│   ├── clustering/
-│   └── trained_models/
+│   ├── best_model/
+│   │   └── churn_prediction_model.pkl
+│   │
+│   ├── preprocessors/
+│   │   ├── preprocessing_pipeline.pkl
+│   │   └── target_encoder.pkl
+│   │
+│   └── segmentation/
+│       ├── kmeans_model.pkl
+│       └── scaler.pkl
+│
+├── notebook/
+│   ├── 01_Data_Understanding.ipynb
+│   ├── 02_Data_Cleaning.ipynb
+│   ├── 03_Exploratory_Data_Analysis.ipynb
+│   ├── 04_Feature_Engineering.ipynb
+│   ├── 05_Customer_Segmentation.ipynb
+│   ├── 06_Model_Training.ipynb
+│   ├── 07_Model_Evaluation.ipynb
+│   └── 08_Recommendation_Engine.ipynb
 │
 ├── reports/
-├── docs/
+│
+├── src/
+│   ├── api/
+│   ├── preprocessing/
+│   ├── segmentation/
+│   ├── recommendation/
+│   ├── training/
+│   ├── evaluation/
+│   ├── visualization/
+│   └── utils/
+│
 ├── tests/
 │
-├── requirements.txt
-├── Dockerfile
 ├── README.md
+├── ROADMAP.md
+├── requirements.txt
 └── LICENSE
 ```
 
@@ -150,40 +166,40 @@ Customer_Churn_Prediction_System/
 
 # Machine Learning Workflow
 
-```
+```text
 Dataset
-    │
-    ▼
-Dataset Understanding
-    │
-    ▼
-Data Cleaning & Preprocessing
-    │
-    ▼
+     │
+     ▼
+Data Understanding
+     │
+     ▼
+Data Cleaning
+     │
+     ▼
 Exploratory Data Analysis
-    │
-    ▼
+     │
+     ▼
 Feature Engineering
-    │
-    ▼
+     │
+     ▼
 Customer Segmentation
-    │
-    ▼
+     │
+     ▼
 Model Training
-    │
-    ▼
+     │
+     ▼
 Model Evaluation
-    │
-    ▼
+     │
+     ▼
 Recommendation Engine
-    │
-    ▼
+     │
+     ▼
 REST API
-    │
-    ▼
+     │
+     ▼
 Dashboard
-    │
-    ▼
+     │
+     ▼
 Docker Deployment
 ```
 
@@ -191,7 +207,7 @@ Docker Deployment
 
 # Machine Learning Models
 
-The following algorithms were trained and evaluated:
+The following algorithms were trained and evaluated.
 
 - Logistic Regression
 - Decision Tree
@@ -206,9 +222,9 @@ The following algorithms were trained and evaluated:
 # Model Performance
 
 | Model | Accuracy | Precision | Recall | F1 Score |
-|--------|---------:|----------:|--------:|----------:|
-| Gradient Boosting | 0.8062 | 0.6735 | 0.5241 | 0.5895 |
-| Logistic Regression | 0.8055 | 0.6572 | 0.5588 | **0.6040** |
+|--------|---------:|----------:|--------:|---------:|
+| Gradient Boosting | **0.8062** | **0.6735** | 0.5241 | 0.5895 |
+| Logistic Regression | 0.8055 | 0.6572 | **0.5588** | **0.6040** |
 | LightGBM | 0.7977 | 0.6395 | 0.5455 | 0.5887 |
 | CatBoost | 0.7970 | 0.6429 | 0.5294 | 0.5806 |
 | XGBoost | 0.7842 | 0.6054 | 0.5374 | 0.5694 |
@@ -228,160 +244,116 @@ The following algorithms were trained and evaluated:
 - Excellent Generalization
 - Fast Prediction
 - Lightweight
-- Easy to Deploy in Production
+- Production Friendly
+
+> **Note:** Update this section if you decide to deploy a different trained model.
 
 ---
 
-# Features
+# Customer Segmentation
 
-## Completed
+Customer segmentation was performed using **K-Means Clustering**.
 
+### Cluster Selection
+
+- Elbow Method
+- Silhouette Score
+
+### Final Number of Clusters
+
+**4**
+
+Customer Groups
+
+- High Value Customers
+- Premium Customers
+- Budget Customers
+- New Customers
+
+---
+
+# Recommendation Engine
+
+The project includes a rule-based recommendation engine that generates personalized retention strategies based on:
+
+- Customer Segment
+- Contract Type
+- Monthly Charges
+- Churn Probability
+
+Example Recommendations
+
+- Offer Loyalty Discounts
+- Upgrade Internet Plan
+- Free Technical Support
+- Premium Security Package
+- Personalized Customer Support
+
+---
+
+# REST API
+
+The project provides REST APIs using **FastAPI**.
+
+### Available Endpoints
+
+| Method | Endpoint | Description |
+|----------|----------|------------|
+| GET | `/` | API Status |
+| GET | `/health` | Health Check |
+| POST | `/predict` | Customer Churn Prediction |
+
+---
+
+### Swagger Documentation
+
+```
+http://127.0.0.1:8000/docs
+```
+
+### ReDoc Documentation
+
+```
+http://127.0.0.1:8000/redoc
+```
+
+---
+
+# Completed Features
+
+- Project Setup
 - Dataset Validation
-- Data Cleaning & Preprocessing
-- Exploratory Data Analysis (EDA)
+- Data Cleaning
+- Exploratory Data Analysis
 - Feature Engineering
-- Customer Segmentation (K-Means)
-- Multiple Machine Learning Models
+- Customer Segmentation
+- Multiple ML Models
 - Model Comparison
 - Best Model Selection
 - Model Serialization
-- Rule-Based Recommendation Engine
-- Personalized Customer Retention Recommendations
-- API-Ready Project Structure
-
-## Upcoming
-
+- Recommendation Engine
 - FastAPI REST API
-- Authentication & Authorization
+- Swagger Documentation
+- ReDoc Documentation
+
+---
+
+# Upcoming Features
+
+- Streamlit Dashboard
+- Authentication
 - Logging & Monitoring
-- Interactive Dashboard
 - Docker Containerization
 - Cloud Deployment
-- API Documentation
-- Final Presentation
+- Postman Collection
+- Final Presentation Video
 
 ---
 
 # Project Progress
 
-## Phase 1 — Project Setup
-
-- Project Structure
-- Virtual Environment
-- Required Libraries
-- GitHub Repository
-- Dataset Collection
-
----
-
-## Phase 2 — Dataset Management
-
-- Data Loading
-- Dataset Validation
-- Dataset Summary
-- Dataset Understanding
-- Data Dictionary
-
----
-
-## Phase 3 — Data Cleaning & Preprocessing
-
-- Missing Value Handling
-- Duplicate Checking
-- Data Type Correction
-- Feature Cleaning
-- Removed CustomerID
-- Converted TotalCharges to Numeric
-- Saved Clean Dataset
-
----
-
-## Phase 4 — Exploratory Data Analysis
-
-- Numerical Analysis
-- Categorical Analysis
-- Correlation Analysis
-- Distribution Plots
-- Count Plots
-- Box Plots
-- Churn Insights
-
----
-
-## Phase 5 — Feature Engineering
-
-- Feature Selection
-- Train-Test Split
-- Label Encoding
-- One-Hot Encoding
-- Feature Scaling
-- ColumnTransformer Pipeline
-- Saved Preprocessing Pipeline
-
----
-
-## Phase 6 — Customer Segmentation
-
-- K-Means Clustering
-- Elbow Method
-- Silhouette Score
-- Customer Cluster Assignment
-- Cluster Profiling
-- Saved K-Means Model
-
----
-
-## Phase 7 — Model Training
-
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- Gradient Boosting
-- XGBoost
-- LightGBM
-- CatBoost
-
----
-
-## Phase 8 — Model Evaluation
-
-- Model Comparison
-- Confusion Matrix
-- Classification Report
-- ROC Curve
-- ROC-AUC Score
-- Best Model Selection
-- Saved Final Model
-
----
-
-## Phase 9 — Recommendation Engine
-
-- Rule-Based Recommendation System
-- Personalized Customer Retention Strategies
-- Recommendation Report
-- Recommendation Dataset
-- API-Ready Recommendation Module
-
----
-
-## Upcoming Phases
-
-- Phase 10 — REST API Development
-- Phase 11 — Dashboard Development
-- Phase 12 — Authentication
-- Phase 13 — Logging & Monitoring
-- Phase 14 — Docker & Deployment
-- Phase 15 — Documentation
-- Phase 16 — Cloud Deployment
-- Phase 17 — Final Presentation
-
----
-
-# Current Status
-
 | Phase | Status |
-|------------------------------|--------------|
+|-------------------------------|----------------|
 | Project Setup | ✅ Completed |
 | Dataset Management | ✅ Completed |
 | Data Cleaning & Preprocessing | ✅ Completed |
@@ -391,12 +363,12 @@ The following algorithms were trained and evaluated:
 | Model Training | ✅ Completed |
 | Model Evaluation | ✅ Completed |
 | Recommendation Engine | ✅ Completed |
-| REST API Development | ⏳ Pending |
+| REST API Development | ✅ Completed |
 | Dashboard Development | ⏳ Pending |
 | Authentication | ⏳ Pending |
 | Logging & Monitoring | ⏳ Pending |
 | Docker & Deployment | ⏳ Pending |
-| Documentation | ⏳ Pending |
+| Documentation | 🟡 In Progress |
 | Cloud Deployment | ⏳ Pending |
 | Final Presentation | ⏳ Pending |
 
@@ -411,7 +383,7 @@ cd Customer_Churn_Prediction_System
 
 python -m venv .venv
 
-source .venv/Scripts/activate
+.\.venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
@@ -420,72 +392,83 @@ pip install -r requirements.txt
 
 # Running the Project
 
-### Launch Jupyter Notebook
+## Run Jupyter Notebook
 
 ```bash
 jupyter notebook
 ```
 
-### Run FastAPI (Coming Soon)
+## Run FastAPI
 
 ```bash
-uvicorn app:app --reload
+uvicorn src.api.app:app --reload
 ```
 
 ---
 
 # Future Improvements
 
-- Explainable AI (SHAP/LIME)
+- Explainable AI (SHAP)
+- LIME Explanations
 - Deep Learning Models
 - Real-Time Prediction
 - CI/CD Pipeline
 - Automated Model Retraining
-- Cloud-Based Monitoring
-- Stream Processing
+- Cloud Monitoring
+- User Authentication
+- Role-Based Access Control
 
 ---
 
 # Overall Progress
 
-```
-███████████████████░░░░░░░░
+```text
+█████████████████████████░░░░░
 
-72% Complete
+85% Complete
 ```
 
 ---
 
 # Deliverables
 
-The completed project will include:
+### Completed
 
 - Complete Source Code
 - GitHub Repository
+- Data Cleaning Pipeline
+- Feature Engineering Pipeline
 - Trained Machine Learning Models
+- Customer Segmentation Model
 - Recommendation Engine
 - REST API
+- API Documentation
+- README Documentation
+- Roadmap
+
+### Remaining
+
 - Dashboard
 - Docker Configuration
-- API Documentation
+- Authentication
+- Logging & Monitoring
 - Postman Collection
-- Deployment Link
-- README Documentation
+- Cloud Deployment
 - Final Presentation
 
 ---
 
 # Author
 
-**Muhammad Ismail**
+## Muhammad Ismail
 
-Machine Learning Engineer Intern
+**Machine Learning Engineer Intern**
 
-**GitHub**
+### GitHub
 
 https://github.com/muhammadismail040
 
-**LinkedIn**
+### LinkedIn
 
 https://www.linkedin.com/in/muhammad-ismail-913ab6322/
 
@@ -493,4 +476,4 @@ https://www.linkedin.com/in/muhammad-ismail-913ab6322/
 
 # License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
