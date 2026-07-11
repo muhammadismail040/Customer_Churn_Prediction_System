@@ -7,7 +7,7 @@ This roadmap outlines the complete development lifecycle of the project, from da
 # 📌 Project Timeline
 
 | Phase | Description | Status |
-|-------|-------------|--------|
+|--------|-------------|--------|
 | Phase 1 | Project Setup | ✅ Completed |
 | Phase 2 | Dataset Management | ✅ Completed |
 | Phase 3 | Data Cleaning & Preprocessing | ✅ Completed |
@@ -18,11 +18,11 @@ This roadmap outlines the complete development lifecycle of the project, from da
 | Phase 8 | Model Evaluation | ✅ Completed |
 | Phase 9 | Recommendation Engine | ✅ Completed |
 | Phase 10 | REST API Development | ✅ Completed |
-| Phase 11 | Interactive Dashboard | ⏳ Pending |
-| Phase 12 | Authentication | ⏳ Pending |
-| Phase 13 | Logging & Monitoring | ⏳ Pending |
-| Phase 14 | Docker Containerization | ⏳ Pending |
-| Phase 15 | Documentation | 🟡 In Progress |
+| Phase 11 | Business Dashboard Development | ✅ Completed |
+| Phase 12 | Documentation | 🟡 In Progress |
+| Phase 13 | Authentication | ⏳ Pending |
+| Phase 14 | Logging & Monitoring | ⏳ Pending |
+| Phase 15 | Docker Containerization | ⏳ Pending |
 | Phase 16 | Cloud Deployment | ⏳ Pending |
 | Phase 17 | Final Presentation | ⏳ Pending |
 
@@ -80,7 +80,7 @@ This roadmap outlines the complete development lifecycle of the project, from da
 
 - Feature Selection
 - Train-Test Split
-- Label Encoding
+- Target Encoding
 - One-Hot Encoding
 - Feature Scaling
 - ColumnTransformer Pipeline
@@ -105,6 +105,8 @@ This roadmap outlines the complete development lifecycle of the project, from da
 
 ## Phase 7 — Model Training
 
+Models Trained:
+
 - Logistic Regression
 - Decision Tree
 - Random Forest
@@ -123,9 +125,14 @@ This roadmap outlines the complete development lifecycle of the project, from da
 - F1 Score
 - Confusion Matrix
 - Classification Report
-- ROC-AUC Evaluation
+- ROC Curve
 - Best Model Selection
+- Model Serialization
 - Saved Final Model
+
+Selected Model:
+
+- Logistic Regression
 
 ---
 
@@ -134,7 +141,9 @@ This roadmap outlines the complete development lifecycle of the project, from da
 - Rule-Based Recommendation System
 - Customer-Specific Retention Strategies
 - Recommendation Module
-- API Integration Ready
+- Business Recommendations
+- API Integration
+- Dashboard Integration
 
 ---
 
@@ -143,31 +152,72 @@ This roadmap outlines the complete development lifecycle of the project, from da
 - FastAPI Project Structure
 - Model Loader
 - Request Validation using Pydantic
-- Prediction Endpoint
-- Health Check Endpoint
 - Home Endpoint
+- Health Check Endpoint
+- Prediction Endpoint
 - Customer Segmentation Integration
 - Recommendation Engine Integration
+- JSON Responses
 - Swagger Documentation
 - ReDoc Documentation
 
 ---
 
-# 🚧 Upcoming Phases
+## Phase 11 — Business Dashboard Development
 
-## Phase 11 — Interactive Dashboard
+Built using **Streamlit**.
 
-- Streamlit Dashboard
-- Customer Prediction Form
-- Prediction Results
-- Churn Probability Visualization
-- Customer Segment Display
-- Recommendation Display
-- Dashboard Styling
+### Home Dashboard
+
+- Total Customers
+- Churn Rate
+- Retention Rate
+- High-Risk Customers
+- Customer Segments
+- Model Accuracy
+
+### Analytics Dashboard
+
+- Churn Distribution
+- Contract Analysis
+- Monthly Charges Analysis
+- Customer Segmentation Charts
+- Correlation Heatmap
+
+### Prediction Dashboard
+
+- Customer Input Form
+- Real-Time Prediction
+- Churn Probability Gauge
+- Customer Segment Detection
+- Risk Assessment
+- Personalized Recommendations
+- Business Insights
+- Prediction History
 
 ---
 
-## Phase 12 — Authentication
+# 🚧 Remaining Phases
+
+## Phase 12 — Documentation
+
+Currently in progress.
+
+Documents being prepared:
+
+- README.md
+- ROADMAP.md
+- API Documentation
+- Dashboard Documentation
+- Model Documentation
+- Installation Guide
+- User Guide
+
+---
+
+## Phase 13 — Authentication
+
+Planned Features
 
 - API Key Authentication
 - Protected Endpoints
@@ -175,49 +225,45 @@ This roadmap outlines the complete development lifecycle of the project, from da
 
 ---
 
-## Phase 13 — Logging & Monitoring
+## Phase 14 — Logging & Monitoring
+
+Planned Features
 
 - API Request Logging
 - Error Logging
-- Model Prediction Logs
-- Monitoring Setup
+- Prediction Logs
+- Monitoring Dashboard
 
 ---
 
-## Phase 14 — Docker Containerization
+## Phase 15 — Docker Containerization
+
+Planned Features
 
 - Dockerfile
 - Docker Compose
-- Container Testing
 - Production Configuration
-
----
-
-## Phase 15 — Documentation
-
-- Complete README
-- API Documentation
-- Dashboard Documentation
-- Deployment Guide
-- Project Report
+- Container Testing
 
 ---
 
 ## Phase 16 — Cloud Deployment
 
+Planned Features
+
 - Deploy FastAPI
-- Deploy Dashboard
+- Deploy Streamlit Dashboard
+- Public API
 - Production URL
-- Public API Access
 
 ---
 
 ## Phase 17 — Final Presentation
 
-Prepare a **10–15 minute demonstration** covering:
+Presentation Topics
 
-- Problem Statement
-- Dataset Overview
+- Project Overview
+- Dataset
 - Data Cleaning
 - Exploratory Data Analysis
 - Feature Engineering
@@ -225,10 +271,10 @@ Prepare a **10–15 minute demonstration** covering:
 - Model Training
 - Model Evaluation
 - Recommendation Engine
-- REST API Demonstration
-- Dashboard Demonstration
-- Deployment Process
-- Challenges Faced
+- REST API
+- Business Dashboard
+- Results
+- Challenges
 - Future Improvements
 
 ---
@@ -236,39 +282,42 @@ Prepare a **10–15 minute demonstration** covering:
 # 📊 Overall Progress
 
 ```text
-█████████████████████████░░░░░
+████████████████████████████░░
 
-85% Complete
+92% Complete
 ```
 
 ---
 
 # 🎯 Remaining Deliverables
 
-- Interactive Dashboard
+- Complete Documentation
 - Authentication
 - Logging & Monitoring
 - Docker Configuration
 - Cloud Deployment
 - Postman Collection
 - Deployment Link
-- Final Documentation
-- Project Demonstration Video
+- Final Presentation
 
 ---
 
 # 📅 Current Focus
 
-**Phase 11 — Interactive Dashboard**
+**Phase 12 — Documentation**
 
-The next milestone is to build a professional Streamlit dashboard that allows users to:
+Current documentation includes:
 
-- Enter customer information
-- Predict churn
-- View churn probability
-- View customer segment
-- Receive personalized recommendations
-- Interact with the model through a clean web interface
+- README.md
+- ROADMAP.md
+
+Upcoming documentation:
+
+- API Documentation
+- Dashboard Documentation
+- Model Documentation
+- Installation Guide
+- User Guide
 
 ---
 
