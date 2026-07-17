@@ -25,15 +25,16 @@ The project demonstrates the complete lifecycle of a production-ready Machine Le
 # Project Objectives
 
 - Predict customer churn using Machine Learning
-- Perform Data Cleaning and Exploratory Data Analysis
-- Engineer meaningful customer features
-- Segment customers using K-Means Clustering
-- Compare multiple Machine Learning algorithms
+- Segment customers based on behavioral patterns
+- Generate personalized customer retention recommendations
+- Compare multiple Machine Learning models
 - Select the best-performing model
-- Generate personalized retention recommendations
-- Develop a production-ready REST API using FastAPI
-- Build an interactive Business Dashboard using Streamlit
-- Prepare the project for Docker deployment
+- Build a production-ready REST API using FastAPI
+- Secure APIs using API Key Authentication
+- Provide interactive API documentation (Swagger & ReDoc)
+- Build an interactive Streamlit Dashboard
+- Implement Logging & Monitoring
+- Deploy the project using Docker and Cloud services
 
 ---
 
@@ -63,7 +64,7 @@ IBM Sample Dataset (Kaggle)
 
 ---
 
-# Technology Stack
+# Technologies Used
 
 ## Programming
 
@@ -74,7 +75,7 @@ IBM Sample Dataset (Kaggle)
 - Pandas
 - NumPy
 
-## Data Visualization
+## Visualization
 
 - Matplotlib
 - Seaborn
@@ -87,24 +88,28 @@ IBM Sample Dataset (Kaggle)
 - LightGBM
 - CatBoost
 
-## Dashboard
-
-- Streamlit
-
 ## API Development
 
 - FastAPI
 - Uvicorn
 - Pydantic
 
+## Dashboard
+
+- Streamlit
+
+## Security
+
+- FastAPI Security
+- Python-dotenv
+
+## Logging
+
+- Python Logging
+
 ## Model Serialization
 
 - Joblib
-
-## Database
-
-- PostgreSQL
-- SQLAlchemy
 
 ## Development Tools
 
@@ -172,41 +177,50 @@ Customer_Churn_Prediction_System/
 
 # Machine Learning Workflow
 
-```text
+```
 Dataset
-    │
-    ▼
+     │
+     ▼
 Data Understanding
-    │
-    ▼
+     │
+     ▼
 Data Cleaning
-    │
-    ▼
+     │
+     ▼
 Exploratory Data Analysis
-    │
-    ▼
+     │
+     ▼
 Feature Engineering
-    │
-    ▼
+     │
+     ▼
 Customer Segmentation
-    │
-    ▼
+     │
+     ▼
 Model Training
-    │
-    ▼
+     │
+     ▼
 Model Evaluation
-    │
-    ▼
+     │
+     ▼
 Recommendation Engine
-    │
-    ▼
+     │
+     ▼
 REST API
-    │
-    ▼
-Business Dashboard
-    │
-    ▼
-Docker Deployment (Upcoming)
+     │
+     ▼
+API Authentication
+     │
+     ▼
+Logging & Monitoring
+     │
+     ▼
+Interactive Dashboard
+     │
+     ▼
+Docker Deployment
+     │
+     ▼
+Cloud Deployment
 ```
 
 ---
@@ -332,6 +346,8 @@ Each prediction generates recommendations dynamically based on the customer's pr
 
 The application exposes prediction services through a **FastAPI** REST API.
 
+---
+
 ## Available Endpoints
 
 | Method | Endpoint | Description |
@@ -360,6 +376,84 @@ http://127.0.0.1:8000/redoc
 - Personalized Recommendations
 - JSON Responses
 - Interactive API Documentation
+
+---
+
+# API Authentication
+
+The REST API is protected using **API Key Authentication**.
+
+### Protected Endpoint
+
+| Method | Endpoint |
+| ------- | -------- |
+| POST | `/predict` |
+
+### Required Header
+
+```text
+x-api-key
+```
+
+### Development API Key
+
+```text
+customer_churn_ml_api_2026
+```
+
+The API key is stored securely inside the `.env` file and verified before processing prediction requests.
+
+Unauthorized requests return:
+
+```http
+401 Unauthorized
+```
+
+Swagger UI also supports API key authentication through the **Authorize** button.
+
+---
+
+# Logging & Monitoring
+
+The project includes a production-ready logging system to monitor API usage and simplify debugging.
+
+### Log Files
+
+```text
+logs/
+├── api.log
+├── prediction.log
+└── error.log
+```
+
+### API Logger
+
+Records:
+
+- HTTP Method
+- Endpoint
+- Status Code
+- Client IP
+- Processing Time
+
+### Prediction Logger
+
+Records:
+
+- Prediction Result
+- Churn Probability
+- Customer Segment
+- Generated Recommendations
+
+### Error Logger
+
+Records:
+
+- Runtime Errors
+- Exception Messages
+- Stack Traces
+
+This logging system helps monitor API activity and troubleshoot issues efficiently.
 
 ---
 
@@ -417,140 +511,41 @@ The dashboard communicates with the trained Machine Learning model and recommend
 
 # Completed Features
 
-The following features have been successfully implemented in the project.
-
-## Data Processing
-
 - Project Setup
-- Dataset Collection
 - Dataset Validation
 - Data Cleaning
-- Missing Value Handling
-- Duplicate Value Checking
-- Data Type Correction
-- Feature Cleaning
-- Data Preprocessing Pipeline
-
----
-
-## Exploratory Data Analysis
-
-- Target Variable Analysis
-- Numerical Feature Analysis
-- Categorical Feature Analysis
-- Correlation Analysis
-- Distribution Plots
-- Count Plots
-- Box Plots
-- Churn Insights Report
-
----
-
-## Feature Engineering
-
-- Feature Selection
-- Train-Test Split
-- Target Encoding
-- One-Hot Encoding
-- Feature Scaling
-- ColumnTransformer Pipeline
-- Saved Preprocessing Pipeline
-
----
-
-## Customer Segmentation
-
-- K-Means Clustering
-- Elbow Method
-- Silhouette Score
-- Customer Cluster Assignment
-- Cluster Profiling
-- Saved K-Means Model
-
----
-
-## Model Training
-
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- Gradient Boosting
-- XGBoost
-- LightGBM
-- CatBoost
-
----
-
-## Model Evaluation
-
-- Accuracy Comparison
-- Precision Comparison
-- Recall Comparison
-- F1 Score Comparison
-- Confusion Matrix
-- Classification Report
-- ROC Curve
+- Exploratory Data Analysis
+- Feature Engineering
+- Customer Segmentation
+- Multiple ML Models
+- Model Comparison
 - Best Model Selection
-- Saved Production Model
-
----
-
-## Recommendation Engine
-
-- Rule-Based Recommendation System
-- Personalized Retention Strategies
-- Customer-Specific Recommendations
-- API Integration
-
----
-
-## REST API
-
-- FastAPI Application
-- Prediction Endpoint
-- Health Check Endpoint
+- Recommendation Engine
+- FastAPI REST API
+- Interactive Streamlit Dashboard
+- API Key Authentication
+- API Request Logging
+- Prediction Logging
+- Error Logging
 - Swagger Documentation
 - ReDoc Documentation
-- Request Validation
-- Response Validation
-
----
-
-## Business Dashboard
-
-- Interactive Streamlit Dashboard
-- Business KPI Cards
-- Analytics Dashboard
-- Prediction Dashboard
-- Churn Probability Gauge
-- Business Insights
-- Customer Information
-- Recommendation Display
-- Prediction History
 
 ---
 
 # Upcoming Features
 
-The following features are planned for future releases.
-
 - Docker Containerization
-- Cloud Deployment
-- User Authentication
-- Logging & Monitoring
 - Postman Collection
-- CI/CD Pipeline
-- Explainable AI (SHAP)
-- LIME Explanations
-- Automated Model Retraining
-- Role-Based Access Control
+- Cloud Deployment
+- Final Documentation
+- Final Presentation
 
 ---
 
 # Project Progress
 
 | Phase | Status |
-|---------------------------------|----------------|
+| ----------------------------- | -------------- |
 | Project Setup | ✅ Completed |
 | Dataset Management | ✅ Completed |
 | Data Cleaning & Preprocessing | ✅ Completed |
@@ -561,9 +556,13 @@ The following features are planned for future releases.
 | Model Evaluation | ✅ Completed |
 | Recommendation Engine | ✅ Completed |
 | REST API Development | ✅ Completed |
-| Business Dashboard | ✅ Completed |
+| Dashboard Development | ✅ Completed |
+| Authentication | ✅ Completed |
+| Logging & Monitoring | ✅ Completed |
+| Docker Containerization | ⏳ Pending |
 | Documentation | 🟡 In Progress |
-| Docker & Deployment | ⏳ Pending |
+| Postman Collection | ⏳ Pending |
+| Cloud Deployment | ⏳ Pending |
 | Final Presentation | ⏳ Pending |
 
 ---
@@ -682,12 +681,12 @@ The project can be further enhanced by implementing:
 # Overall Progress
 
 ```text
-████████████████████████████░░
+██████████████████████████████░░░░
 
-92% Complete
+90% Complete
 ```
 
-The project has successfully completed the complete Machine Learning pipeline, including customer segmentation, model training, model evaluation, recommendation engine, REST API development, and an interactive business dashboard.
+The project has successfully completed the complete Machine Learning pipeline, including customer segmentation, model training, model evaluation, recommendation engine, REST API development, API authentication, logging and monitoring, and an interactive business dashboard.
 
 The remaining work focuses on deployment and final documentation.
 
@@ -701,29 +700,26 @@ The remaining work focuses on deployment and final documentation.
 - GitHub Repository
 - Data Cleaning Pipeline
 - Feature Engineering Pipeline
+- Trained Machine Learning Models
 - Customer Segmentation Model
-- Trained Machine Learning Model
 - Recommendation Engine
 - FastAPI REST API
-- Swagger API Documentation
-- ReDoc Documentation
-- Interactive Streamlit Business Dashboard
-- Dashboard Analytics
-- Real-Time Customer Prediction
-- Prediction History
+- Interactive Streamlit Dashboard
+- API Key Authentication
+- Logging & Monitoring
+- API Documentation
 - README Documentation
-- ROADMAP Documentation
+- ROADMAP
 
 ---
 
 ## Remaining Deliverables
 
 - Docker Configuration
-- Cloud Deployment
-- Logging & Monitoring
-- Authentication
 - Postman Collection
-- Final Project Presentation
+- Cloud Deployment
+- Final Documentation
+- Final Presentation
 
 ---
 

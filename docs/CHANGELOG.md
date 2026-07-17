@@ -1,21 +1,36 @@
 # Changelog
 
-## Version 0.1.0
-
-### Added
-
-- Project Structure
-- Dataset
-- Data Loader
-- Dataset Validator
-- Data Cleaning
-- Exploratory Data Analysis
-- Feature Engineering
-- Preprocessing Pipeline
-- Target Encoder
+All notable changes to this project are documented here.
 
 ---
 
-Next Version
+## Version 1.1.0
 
-Customer Segmentation
+### Added
+
+- API Key Authentication
+- Protected Prediction Endpoint
+- Swagger Authorization
+- Interactive Dashboard
+- Prediction History
+- Customer Analytics
+- Business Dashboard
+- Gauge Visualization
+- Recommendation Display
+- Customer Segmentation Display
+
+### Improved
+
+- API Documentation
+- README
+- ROADMAP
+- Project Structure
+- Prediction Pipeline
+
+### Fixed
+
+- Dashboard Import Errors
+- Streamlit Module Imports
+- Prediction Module
+- Recommendation Engine Integration
+- Authentication Validation

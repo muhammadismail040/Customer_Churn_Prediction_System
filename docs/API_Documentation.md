@@ -2,17 +2,141 @@
 
 ## Overview
 
-This REST API provides customer churn prediction using the trained Gradient Boosting model.
+The Customer Churn Prediction API is built using FastAPI and provides secure endpoints for predicting customer churn, customer segmentation, and personalized retention recommendations.
 
-It also performs customer segmentation and generates personalized retention recommendations.
-
----
-
-# Base URL
+**Base URL**
 
 ```
 http://127.0.0.1:8000
 ```
+
+---
+
+# Authentication
+
+The `/predict` endpoint is protected using API Key Authentication.
+
+## Header
+
+| Header | Value |
+|---------|-------|
+| x-api-key | customer_churn_ml_api_2026 |
+
+Example:
+
+```http
+x-api-key: customer_churn_ml_api_2026
+```
+
+If the API Key is missing or invalid, the API returns:
+
+```json
+{
+    "detail": "Invalid API Key."
+}
+```
+
+Status Code:
+
+```
+401 Unauthorized
+```
+
+---
+
+# Endpoints
+
+## Home
+
+### GET /
+
+Returns API status.
+
+Response
+
+```json
+{
+    "message": "Customer Churn Prediction API Running"
+}
+```
+
+---
+
+## Health Check
+
+### GET /health
+
+Response
+
+```json
+{
+    "status": "Healthy"
+}
+```
+
+---
+
+## Predict Customer
+
+### POST /predict
+
+Headers
+
+```http
+x-api-key: customer_churn_ml_api_2026
+Content-Type: application/json
+```
+
+Request Body
+
+```json
+{
+    "gender": "Female",
+    "SeniorCitizen": 0,
+    "Partner": "Yes",
+    "Dependents": "No",
+    "tenure": 5,
+    "PhoneService": "Yes",
+    "MultipleLines": "No",
+    "InternetService": "Fiber optic",
+    "OnlineSecurity": "No",
+    "OnlineBackup": "Yes",
+    "DeviceProtection": "No",
+    "TechSupport": "No",
+    "StreamingTV": "Yes",
+    "StreamingMovies": "Yes",
+    "Contract": "Month-to-month",
+    "PaperlessBilling": "Yes",
+    "PaymentMethod": "Electronic check",
+    "MonthlyCharges": 85.5,
+    "TotalCharges": 427.5
+}
+```
+
+Successful Response
+
+```json
+{
+    "prediction": "Yes",
+    "probability": 0.91,
+    "cluster": 2,
+    "recommendations": [
+        "Offer discount for yearly contract.",
+        "Recommend Tech Support service."
+    ]
+}
+```
+
+---
+
+# Response Codes
+
+| Code | Description |
+|------|-------------|
+| 200 | Success |
+| 401 | Invalid or Missing API Key |
+| 422 | Validation Error |
+| 500 | Internal Server Error |
 
 ---
 
@@ -32,95 +156,10 @@ http://127.0.0.1:8000/redoc
 
 ---
 
-# Endpoints
+# Version
 
-## GET /
+Current Version
 
-Returns API status.
-
-Response
-
-```json
-{
-    "message":"Customer Churn Prediction API Running"
-}
 ```
-
----
-
-## GET /health
-
-Checks API health.
-
-```json
-{
-    "status":"Healthy"
-}
+v1.1.0
 ```
-
----
-
-## POST /predict
-
-Predict customer churn.
-
-### Request
-
-```json
-{
-  "gender":"Female",
-  "SeniorCitizen":0,
-  "Partner":"Yes",
-  "Dependents":"No",
-  "tenure":12,
-  "PhoneService":"Yes",
-  "MultipleLines":"No",
-  "InternetService":"Fiber optic",
-  "OnlineSecurity":"No",
-  "OnlineBackup":"Yes",
-  "DeviceProtection":"No",
-  "TechSupport":"No",
-  "StreamingTV":"Yes",
-  "StreamingMovies":"Yes",
-  "Contract":"Month-to-month",
-  "PaperlessBilling":"Yes",
-  "PaymentMethod":"Electronic check",
-  "MonthlyCharges":79.5,
-  "TotalCharges":954
-}
-```
-
-### Response
-
-```json
-{
-  "prediction":"Yes",
-  "probability":0.85,
-  "cluster":2,
-  "recommendations":[
-      "Provide loyalty offers for new customers."
-  ]
-}
-```
-
----
-
-# Response Fields
-
-| Field | Description |
-|--------|-------------|
-| prediction | Customer churn prediction |
-| probability | Model confidence |
-| cluster | Customer segment |
-| recommendations | Personalized retention suggestions |
-
----
-
-# Technologies
-
-- FastAPI
-- Pydantic
-- Scikit-Learn
-- Joblib
-
----

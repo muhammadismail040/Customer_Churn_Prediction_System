@@ -1,15 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
 # Virtual Environment
 .venv/
 
-# Python
-__pycache__/
-*.py[cod]
+# Environment Variables
+.env
 
 # Jupyter
 .ipynb_checkpoints/
 
+# Streamlit
+.streamlit/
+
 # VS Code
 .vscode/
 
-# Environment
-.env
+# Logs
+*.log
