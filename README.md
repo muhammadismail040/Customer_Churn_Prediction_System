@@ -123,54 +123,149 @@ IBM Sample Dataset (Kaggle)
 # Project Structure
 
 ```text
-Customer_Churn_Prediction_System/
+CUSTOMER_CHURN_PREDICTION_SYSTEM/
 │
 ├── dashboard/
-│   ├── app.py
-│   ├── metrics.py
-│   ├── charts.py
-│   ├── prediction.py
-│   ├── gauge.py
-│   ├── history.py
-│   ├── sidebar.py
-│   ├── utils.py
-│   ├── assets/
-│   └── pages/
-│       ├── 2_Analytics.py
-│       └── 3_Prediction.py
+│   ├── assets/                    # Dashboard assets (images, css)
+│   ├── pages/
+│   │   ├── 2_Analytics.py         # Analytics page
+│   │   └── 3_Prediction.py        # Prediction page
+│   ├── __init__.py
+│   ├── app.py                     # Main dashboard application
+│   ├── charts.py                  # Chart generation functions
+│   ├── gauge.py                   # Gauge visualization
+│   ├── history.py                 # Prediction history management
+│   ├── metrics.py                 # KPI metrics calculations
+│   ├── prediction.py              # Prediction interface
+│   ├── sidebar.py                 # Sidebar components
+│   ├── test_gauge.py              # Gauge tests
+│   ├── test_history.py            # History tests
+│   ├── test.py                    # General tests
+│   └── utils.py                   # Utility functions
 │
 ├── data/
-│   ├── raw/
+│   ├── final/
+│   │   └── Customer_Churn_With_Recommendations.csv  # Final dataset with recommendations
 │   ├── processed/
-│   └── final/
+│   │   └── Telco_Customer_Churn_Cleaned.csv        # Cleaned dataset
+│   └── raw/
+│       └── Telco_Customer_Churn.csv                # Raw dataset
 │
 ├── docs/
+│   ├── API_Documentation.md
+│   ├── Authentication_Documentation.md
+│   ├── CHANGELOG.md
+│   ├── Dashboard_Documentation.md
+│   ├── Data_Dictionary.md
+│   ├── Installation_Guide.md
+│   ├── Logging_Monitoring.md
+│   ├── Model_Documentation.md
+│   ├── project_status.md
+│   └── User_Guide.md
+│
+├── logs/
+│   ├── api.log                    # API request logs
+│   ├── error.log                  # Error logs
+│   └── prediction.log             # Prediction logs
 │
 ├── models/
 │   ├── best_model/
+│   │   └── churn_prediction_model.pkl              # Production model
 │   ├── preprocessors/
+│   │   ├── preprocessing_pipeline.pkl              # Preprocessing pipeline
+│   │   └── target_encoder.pkl                      # Target encoder
 │   └── segmentation/
+│       ├── kmeans_model.pkl                        # K-Means model
+│       └── scaler.pkl                              # Feature scaler
 │
 ├── notebook/
+│   ├── 01_data_understanding.ipynb                 # Data understanding
+│   ├── 02_Data_Cleaning.ipynb                     # Data cleaning
+│   ├── 03_Exploratory_Data_Analysis.ipynb         # EDA
+│   ├── 04_Feature_Engineering.ipynb               # Feature engineering
+│   ├── 05_Customer_Segmentation.ipynb             # Customer segmentation
+│   ├── 06_Model_Training.ipynb                    # Model training
+│   ├── 07_Model_Evaluation.ipynb                  # Model evaluation
+│   ├── 08_Recommendation_Engine.ipynb             # Recommendation engine
+│   ├── test.ipynb                                 # Test notebook
+│   └── catboost_info/                             # CatBoost training info
+│       ├── learn/
+│       ├── tmp/
+│       ├── catboost_training.json
+│       ├── learn_error.tsv
+│       └── time_left.tsv
 │
 ├── reports/
+│   ├── reports/
+│   ├── Customer_Segmentation_Report.md
+│   ├── Recommendation_Engine_Report.md
+│   ├── Dataset_Summary.md
+│   ├── EDA_Report.md
+│   ├── Initial_Observations.md
+│   └── prediction_history.csv                      # Prediction history
 │
 ├── src/
 │   ├── api/
-│   ├── preprocessing/
-│   ├── segmentation/
-│   ├── recommendation/
-│   ├── training/
+│   │   ├── __init__.py
+│   │   ├── auth.py               # API Key authentication
+│   │   ├── model_loader.py       # Model loading utilities
+│   │   ├── predictor.py          # Prediction logic
+│   │   ├── routes.py             # API routes
+│   │   └── schemas.py            # Pydantic schemas
+│   │
+│   ├── config/
+│   │   └── __init__.py
+│   │
 │   ├── evaluation/
-│   ├── visualization/
-│   └── utils/
+│   │   └── __init__.py
+│   │
+│   ├── features/
+│   │   └── __init__.py
+│   │
+│   ├── models/
+│   │   └── __init__.py
+│   │
+│   ├── pipeline/
+│   │   └── __init__.py
+│   │
+│   ├── preprocessing/
+│   │   ├── __init__.py
+│   │   ├── data_loader.py       # Data loading utilities
+│   │   └── validator.py          # Data validation
+│   │
+│   ├── recommendation/
+│   │   ├── __init__.py
+│   │   ├── recommendation_engine.py  # Recommendation logic
+│   │   └── rules.py             # Recommendation rules
+│   │
+│   ├── segmentation/
+│   │   ├── __init__.py
+│   │   ├── cluster_analysis.py  # Cluster analysis
+│   │   ├── kmeans_model.py      # K-Means implementation
+│   │   └── visualization.py     # Segmentation visualization
+│   │
+│   ├── training/
+│   │   └── __init__.py
+│   │
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── logger.py            # Logging configuration
+│   │   └── visualization/       # Visualization utilities
+│   │
+│   ├── tests/
+│   │   ├── test_auth.py         # Authentication tests
+│   │   └── test_logger.py       # Logger tests
+│   │
+│   ├── __init__.py
+│   └── __pycache__/
 │
-├── tests/
-│
-├── README.md
-├── ROADMAP.md
-├── requirements.txt
-└── LICENSE
+├── .env                          # Environment variables
+├── .gitignore                    # Git ignore file
+├── Customer Churn Prediction & Recommendation System.pdf
+├── LICENSE                       # MIT License
+├── README.md                     # Project documentation
+├── requirements.txt              # Project dependencies
+└── ROADMAP.md                    # Development roadmap
 ```
 
 ---
@@ -622,7 +717,7 @@ jupyter notebook
 ## Run FastAPI
 
 ```bash
-uvicorn src.api.app:app --reload
+uvicorn src.api.routes:app --reload
 ```
 
 API URL
@@ -732,11 +827,13 @@ The project includes the following documentation.
 | README.md | Complete project overview |
 | ROADMAP.md | Development roadmap and project timeline |
 | API_Documentation.md | REST API documentation |
+| Authentication_Documentation.md | API authentication guide |
 | Dashboard_Documentation.md | Dashboard features and usage |
 | Model_Documentation.md | Machine Learning pipeline |
 | Data_Dictionary.md | Dataset feature descriptions |
 | Installation_Guide.md | Installation instructions |
 | User_Guide.md | Dashboard and API usage |
+| Logging_Monitoring.md | Logging and monitoring guide |
 | CHANGELOG.md | Project version history |
 | project_status.md | Current development status |
 
@@ -754,13 +851,16 @@ Customer_Churn_Prediction_System
 ├── docs/
 ├── reports/
 ├── data/
+├── logs/
 ├── tests/
 │
+├── .env
+├── .gitignore
 ├── README.md
 ├── ROADMAP.md
 ├── requirements.txt
 ├── LICENSE
-└── .gitignore
+└── Customer Churn Prediction & Recommendation System.pdf
 ```
 
 ---
