@@ -3,15 +3,40 @@ FastAPI Application
 Customer Churn Prediction & Recommendation System
 """
 
+from contextlib import asynccontextmanager
 import time
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 
 from src.api.routes import router
+from src.database.database import create_tables
+import src.database.models
 from src.utils.logger import api_logger
 
+
+# ============================================================
+# Create Database Tables on Startup
+# ============================================================
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Create database tables when FastAPI starts.
+    """
+
+    create_tables()
+
+    yield
+
+
+# ============================================================
+# FastAPI Application
+# ============================================================
+
 app = FastAPI(
+    lifespan=lifespan,
     title="Customer Churn Prediction & Recommendation API",
     description="""
 Customer Churn Prediction & Recommendation System
@@ -46,15 +71,29 @@ customer_churn_ml_api_2026
     },
 )
 
-# --------------------------------------------------------
+# ============================================================
+# CORS Configuration
+# ============================================================
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ============================================================
 # Include API Routes
-# --------------------------------------------------------
+# ============================================================
 
 app.include_router(router)
 
-# --------------------------------------------------------
+# ============================================================
 # Request Logging Middleware
-# --------------------------------------------------------
+# ============================================================
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
@@ -78,9 +117,10 @@ async def log_requests(request: Request, call_next):
 
     return response
 
-# --------------------------------------------------------
+
+# ============================================================
 # Custom Swagger Authentication
-# --------------------------------------------------------
+# ============================================================
 
 def custom_openapi():
 
@@ -112,8 +152,9 @@ def custom_openapi():
 
     return app.openapi_schema
 
-# --------------------------------------------------------
+
+# ============================================================
 # Register Custom OpenAPI
-# --------------------------------------------------------
+# ============================================================
 
 app.openapi = custom_openapi

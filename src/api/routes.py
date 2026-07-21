@@ -2,25 +2,37 @@
 API Routes
 """
 
+from typing import List
+
 from fastapi import (
     APIRouter,
     Depends,
     HTTPException,
 )
+from sqlalchemy.orm import Session
 
 from src.api.auth import verify_api_key
-
 from src.api.schemas import (
     CustomerData,
     PredictionResponse,
     HealthResponse,
     HomeResponse,
+    PredictionHistoryResponse,
+    PredictionCountResponse,
 )
-
 from src.api.predictor import predict_customer
 
-router = APIRouter()
+from src.database.database import get_db
+from src.database.crud import (
+    save_prediction,
+    get_predictions,
+    get_prediction_by_id,
+    get_latest_prediction,
+    get_prediction_count,
+    delete_prediction,
+)
 
+router = APIRouter()
 
 # ==========================================================
 # Home Endpoint
@@ -35,9 +47,6 @@ def home():
     """
     Home Endpoint
     """
-
-    print("✅ Home endpoint called")
-
     return {
         "message": "Customer Churn Prediction API Running"
     }
@@ -56,9 +65,6 @@ def health():
     """
     Health Check Endpoint
     """
-
-    print("✅ Health endpoint called")
-
     return {
         "status": "Healthy"
     }
@@ -75,19 +81,13 @@ def health():
 )
 def predict(
     customer: CustomerData,
+    db: Session = Depends(get_db),
     _: str = Depends(verify_api_key),
 ):
     """
-    Predict customer churn,
-    customer segment,
-    and generate personalized retention recommendations.
+    Predict customer churn, customer segment,
+    and generate personalized recommendations.
     """
-
-    print("=" * 60)
-    print("✅ PREDICT ENDPOINT EXECUTED")
-    print("Customer Data:")
-    print(customer.model_dump())
-    print("=" * 60)
 
     try:
 
@@ -95,21 +95,146 @@ def predict(
             customer.model_dump()
         )
 
-        print("=" * 60)
-        print("Prediction Result:")
-        print(result)
-        print("=" * 60)
+        save_prediction(
+            db=db,
+            customer=customer.model_dump(),
+            result=result,
+        )
 
         return result
 
     except Exception as e:
 
-        print("=" * 60)
-        print("❌ Prediction Error")
-        print(e)
-        print("=" * 60)
-
         raise HTTPException(
             status_code=500,
             detail=str(e),
         )
+
+
+# ==========================================================
+# Get All Predictions
+# ==========================================================
+
+@router.get(
+    "/predictions",
+    response_model=List[PredictionHistoryResponse],
+    tags=["Prediction History"],
+)
+def all_predictions(
+    db: Session = Depends(get_db),
+):
+    """
+    Get all prediction history.
+    """
+    return get_predictions(db)
+
+
+# ==========================================================
+# Get Latest Prediction
+# ==========================================================
+
+@router.get(
+    "/predictions/latest",
+    response_model=PredictionHistoryResponse,
+    tags=["Prediction History"],
+)
+def latest_prediction(
+    db: Session = Depends(get_db),
+):
+    """
+    Get latest prediction.
+    """
+
+    prediction = get_latest_prediction(db)
+
+    if prediction is None:
+        raise HTTPException(
+            status_code=404,
+            detail="No prediction history found.",
+        )
+
+    return prediction
+
+
+# ==========================================================
+# Prediction Count
+# ==========================================================
+
+@router.get(
+    "/predictions/count",
+    response_model=PredictionCountResponse,
+    tags=["Prediction History"],
+)
+def prediction_count(
+    db: Session = Depends(get_db),
+):
+    """
+    Get total number of predictions.
+    """
+
+    return {
+        "total_predictions": get_prediction_count(db)
+    }
+
+
+# ==========================================================
+# Get Prediction By ID
+# ==========================================================
+
+@router.get(
+    "/predictions/{prediction_id}",
+    response_model=PredictionHistoryResponse,
+    tags=["Prediction History"],
+)
+def prediction_by_id(
+    prediction_id: int,
+    db: Session = Depends(get_db),
+):
+    """
+    Get prediction by ID.
+    """
+
+    prediction = get_prediction_by_id(
+        db,
+        prediction_id,
+    )
+
+    if prediction is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Prediction not found.",
+        )
+
+    return prediction
+
+
+# ==========================================================
+# Delete Prediction
+# ==========================================================
+
+@router.delete(
+    "/predictions/{prediction_id}",
+    tags=["Prediction History"],
+)
+def remove_prediction(
+    prediction_id: int,
+    db: Session = Depends(get_db),
+):
+    """
+    Delete prediction by ID.
+    """
+
+    prediction = delete_prediction(
+        db,
+        prediction_id,
+    )
+
+    if prediction is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Prediction not found.",
+        )
+
+    return {
+        "message": "Prediction deleted successfully."
+    }
