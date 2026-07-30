@@ -1,57 +1,37 @@
-import { useEffect, useState } from "react";
-import { getHealth } from "./services/predictionService";
+import PredictionForm from "./components/PredictionForm";
+import PredictionHistory from "./components/PredictionHistory";
+import { useState } from "react";
 
 function App() {
 
-    const [status, setStatus] = useState("Checking...");
+    const [refresh, setRefresh] = useState(false);
 
-    useEffect(() => {
-
-        async function checkAPI() {
-
-            try {
-
-                const response = await getHealth();
-
-                setStatus(response.data.status);
-
-            } catch (error) {
-
-                console.error(error);
-
-                setStatus("Backend Offline");
-
-            }
-
-        }
-
-        checkAPI();
-
-    }, []);
+    const refreshHistory = () => {
+        setRefresh(prev => !prev);
+    };
 
     return (
 
-        <div className="container mt-5">
+        <div className="container my-5">
 
-            <h1 className="text-center">
+            <h1 className="text-center mb-4">
                 Customer Churn Prediction Dashboard
             </h1>
 
-            <hr />
+            <PredictionForm
+                onPredictionSuccess={refreshHistory}
+            />
 
-            <div className="card p-4 shadow">
+            <hr className="my-5" />
 
-                <h4>Backend Status</h4>
-
-                <h2 className="text-success">
-                    {status}
-                </h2>
-
-            </div>
+            <PredictionHistory
+                refresh={refresh}
+            />
 
         </div>
 
     );
+
 }
 
 export default App;

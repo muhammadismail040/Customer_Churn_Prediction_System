@@ -1,12 +1,46 @@
 # Customer Churn Prediction & Recommendation System
 
-An end-to-end Machine Learning project that predicts customer churn, segments customers into meaningful groups, generates personalized retention recommendations, exposes predictions through a REST API, and provides an interactive Business Dashboard built with Streamlit.
+An end-to-end Machine Learning project that predicts customer churn, segments customers into meaningful groups, generates personalized retention recommendations, exposes predictions through a REST API, and provides an interactive React Dashboard for customer churn prediction, analytics, prediction history, and business insights.
 
 The project follows an industry-standard Machine Learning pipeline from raw data preprocessing to model deployment and is being developed as part of a **Machine Learning Engineering Internship**.
 
 ---
 
-# Project Overview
+## 📋 Table of Contents
+
+- [Project Overview](#project-overview)
+- [Project Objectives](#project-objectives)
+- [Dataset](#dataset)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Machine Learning Workflow](#machine-learning-workflow)
+- [Machine Learning Models](#machine-learning-models)
+- [Model Performance](#model-performance)
+- [Best Model](#best-model)
+- [Customer Segmentation](#customer-segmentation)
+- [Recommendation Engine](#recommendation-engine)
+- [REST API](#rest-api)
+- [API Authentication](#api-authentication)
+- [Logging & Monitoring](#logging--monitoring)
+- [React Dashboard](#react-dashboard)
+- [Completed Features](#completed-features)
+- [Upcoming Features](#upcoming-features)
+- [Project Progress](#project-progress)
+- [Installation](#installation)
+- [Running the Project](#running-the-project)
+- [Docker](#docker)
+- [Postman Collection](#postman-collection)
+- [Future Improvements](#future-improvements)
+- [Overall Progress](#overall-progress)
+- [Deliverables](#deliverables)
+- [Documentation](#documentation)
+- [Author](#author)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
+
+---
+
+## Project Overview
 
 Customer churn is one of the biggest challenges faced by subscription-based businesses such as telecom companies. Losing existing customers directly impacts revenue and business growth.
 
@@ -16,13 +50,13 @@ This project provides a complete Machine Learning solution capable of:
 - Segmenting customers using K-Means Clustering
 - Generating personalized retention recommendations
 - Serving predictions through a FastAPI REST API
-- Visualizing business insights using an interactive Streamlit Dashboard
+- Visualizing business insights using an interactive React Dashboard
 
 The project demonstrates the complete lifecycle of a production-ready Machine Learning application.
 
 ---
 
-# Project Objectives
+## Project Objectives
 
 - Predict customer churn using Machine Learning
 - Segment customers based on behavioral patterns
@@ -32,23 +66,21 @@ The project demonstrates the complete lifecycle of a production-ready Machine Le
 - Build a production-ready REST API using FastAPI
 - Secure APIs using API Key Authentication
 - Provide interactive API documentation (Swagger & ReDoc)
-- Build an interactive Streamlit Dashboard
+- Build an interactive React Dashboard
 - Implement Logging & Monitoring
 - Deploy the project using Docker and Cloud services
 
 ---
 
-# Dataset
+## Dataset
 
-## Dataset Name
-
+### Dataset Name
 **Telco Customer Churn Dataset**
 
-## Source
-
+### Source
 IBM Sample Dataset (Kaggle)
 
-## Dataset Summary
+### Dataset Summary
 
 | Item | Value |
 |------|-------|
@@ -58,61 +90,66 @@ IBM Sample Dataset (Kaggle)
 | Target Variable | Churn |
 
 ### Target Classes
-
 - Yes
 - No
 
 ---
 
-# Technologies Used
+## Technologies Used
 
-## Programming
+### Frontend
+- React.js
+- Bootstrap 5
+- Axios
+- Recharts
 
+### Backend
+- FastAPI
+- Uvicorn
+- SQLAlchemy
+- Pydantic
+
+### Database
+- PostgreSQL
+
+### Containerization
+- Docker
+- Docker Compose
+
+### Programming
 - Python 3.12
 
-## Data Analysis
-
+### Data Analysis
 - Pandas
 - NumPy
 
-## Visualization
-
+### Visualization
 - Matplotlib
 - Seaborn
 - Plotly
 
-## Machine Learning
-
+### Machine Learning
 - Scikit-Learn
 - XGBoost
 - LightGBM
 - CatBoost
 
-## API Development
-
+### API Development
 - FastAPI
 - Uvicorn
 - Pydantic
 
-## Dashboard
-
-- Streamlit
-
-## Security
-
+### Security
 - FastAPI Security
 - Python-dotenv
 
-## Logging
-
+### Logging
 - Python Logging
 
-## Model Serialization
-
+### Model Serialization
 - Joblib
 
-## Development Tools
-
+### Development Tools
 - VS Code
 - Jupyter Notebook
 - Git
@@ -120,157 +157,132 @@ IBM Sample Dataset (Kaggle)
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```text
 CUSTOMER_CHURN_PREDICTION_SYSTEM/
 │
-├── dashboard/
-│   ├── assets/                    # Dashboard assets (images, css)
-│   ├── pages/
-│   │   ├── 2_Analytics.py         # Analytics page
-│   │   └── 3_Prediction.py        # Prediction page
-│   ├── __init__.py
-│   ├── app.py                     # Main dashboard application
-│   ├── charts.py                  # Chart generation functions
-│   ├── gauge.py                   # Gauge visualization
-│   ├── history.py                 # Prediction history management
-│   ├── metrics.py                 # KPI metrics calculations
-│   ├── prediction.py              # Prediction interface
-│   ├── sidebar.py                 # Sidebar components
-│   ├── test_gauge.py              # Gauge tests
-│   ├── test_history.py            # History tests
-│   ├── test.py                    # General tests
-│   └── utils.py                   # Utility functions
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── DashboardCards.jsx
+│   │   │   ├── PredictionForm.jsx
+│   │   │   ├── PredictionHistory.jsx
+│   │   │   ├── PredictionResult.jsx
+│   │   │   ├── Charts/
+│   │   │   │   ├── PieChart.jsx
+│   │   │   │   └── ClusterChart.jsx
+│   │   │   └── common/
+│   │   │       ├── Header.jsx
+│   │   │       ├── Footer.jsx
+│   │   │       └── Pagination.jsx
+│   │   ├── services/
+│   │   │   ├── api.js
+│   │   │   ├── predictionService.js
+│   │   │   └── historyService.js
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── package.json
+│   ├── vite.config.js
+│   └── .env
 │
-├── data/
-│   ├── final/
-│   │   └── Customer_Churn_With_Recommendations.csv  # Final dataset with recommendations
-│   ├── processed/
-│   │   └── Telco_Customer_Churn_Cleaned.csv        # Cleaned dataset
-│   └── raw/
-│       └── Telco_Customer_Churn.csv                # Raw dataset
-│
-├── docs/
-│   ├── API_Documentation.md
-│   ├── Authentication_Documentation.md
-│   ├── CHANGELOG.md
-│   ├── Dashboard_Documentation.md
-│   ├── Data_Dictionary.md
-│   ├── Installation_Guide.md
-│   ├── Logging_Monitoring.md
-│   ├── Model_Documentation.md
-│   ├── project_status.md
-│   └── User_Guide.md
-│
-├── logs/
-│   ├── api.log                    # API request logs
-│   ├── error.log                  # Error logs
-│   └── prediction.log             # Prediction logs
-│
-├── models/
-│   ├── best_model/
-│   │   └── churn_prediction_model.pkl              # Production model
-│   ├── preprocessors/
-│   │   ├── preprocessing_pipeline.pkl              # Preprocessing pipeline
-│   │   └── target_encoder.pkl                      # Target encoder
-│   └── segmentation/
-│       ├── kmeans_model.pkl                        # K-Means model
-│       └── scaler.pkl                              # Feature scaler
-│
-├── notebook/
-│   ├── 01_data_understanding.ipynb                 # Data understanding
-│   ├── 02_Data_Cleaning.ipynb                     # Data cleaning
-│   ├── 03_Exploratory_Data_Analysis.ipynb         # EDA
-│   ├── 04_Feature_Engineering.ipynb               # Feature engineering
-│   ├── 05_Customer_Segmentation.ipynb             # Customer segmentation
-│   ├── 06_Model_Training.ipynb                    # Model training
-│   ├── 07_Model_Evaluation.ipynb                  # Model evaluation
-│   ├── 08_Recommendation_Engine.ipynb             # Recommendation engine
-│   ├── test.ipynb                                 # Test notebook
-│   └── catboost_info/                             # CatBoost training info
-│       ├── learn/
-│       ├── tmp/
-│       ├── catboost_training.json
-│       ├── learn_error.tsv
-│       └── time_left.tsv
-│
-├── reports/
-│   ├── reports/
-│   ├── Customer_Segmentation_Report.md
-│   ├── Recommendation_Engine_Report.md
-│   ├── Dataset_Summary.md
-│   ├── EDA_Report.md
-│   ├── Initial_Observations.md
-│   └── prediction_history.csv                      # Prediction history
-│
-├── src/
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── auth.py               # API Key authentication
-│   │   ├── model_loader.py       # Model loading utilities
-│   │   ├── predictor.py          # Prediction logic
-│   │   ├── routes.py             # API routes
-│   │   └── schemas.py            # Pydantic schemas
-│   │
-│   ├── config/
+├── backend/
+│   ├── src/
+│   │   ├── api/
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py
+│   │   │   ├── model_loader.py
+│   │   │   ├── predictor.py
+│   │   │   ├── routes.py
+│   │   │   └── schemas.py
+│   │   ├── config/
+│   │   │   └── __init__.py
+│   │   ├── database/
+│   │   │   ├── __init__.py
+│   │   │   ├── connection.py
+│   │   │   └── models.py
+│   │   ├── preprocessing/
+│   │   │   ├── __init__.py
+│   │   │   ├── data_loader.py
+│   │   │   └── validator.py
+│   │   ├── recommendation/
+│   │   │   ├── __init__.py
+│   │   │   ├── recommendation_engine.py
+│   │   │   └── rules.py
+│   │   ├── segmentation/
+│   │   │   ├── __init__.py
+│   │   │   ├── cluster_analysis.py
+│   │   │   ├── kmeans_model.py
+│   │   │   └── visualization.py
+│   │   ├── utils/
+│   │   │   ├── __init__.py
+│   │   │   └── logger.py
 │   │   └── __init__.py
-│   │
-│   ├── evaluation/
-│   │   └── __init__.py
-│   │
-│   ├── features/
-│   │   └── __init__.py
-│   │
 │   ├── models/
-│   │   └── __init__.py
-│   │
-│   ├── pipeline/
-│   │   └── __init__.py
-│   │
-│   ├── preprocessing/
-│   │   ├── __init__.py
-│   │   ├── data_loader.py       # Data loading utilities
-│   │   └── validator.py          # Data validation
-│   │
-│   ├── recommendation/
-│   │   ├── __init__.py
-│   │   ├── recommendation_engine.py  # Recommendation logic
-│   │   └── rules.py             # Recommendation rules
-│   │
-│   ├── segmentation/
-│   │   ├── __init__.py
-│   │   ├── cluster_analysis.py  # Cluster analysis
-│   │   ├── kmeans_model.py      # K-Means implementation
-│   │   └── visualization.py     # Segmentation visualization
-│   │
-│   ├── training/
-│   │   └── __init__.py
-│   │
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── logger.py            # Logging configuration
-│   │   └── visualization/       # Visualization utilities
-│   │
-│   ├── tests/
-│   │   ├── test_auth.py         # Authentication tests
-│   │   └── test_logger.py       # Logger tests
-│   │
-│   ├── __init__.py
-│   └── __pycache__/
+│   │   ├── best_model/
+│   │   │   └── churn_prediction_model.pkl
+│   │   ├── preprocessors/
+│   │   │   ├── preprocessing_pipeline.pkl
+│   │   │   └── target_encoder.pkl
+│   │   └── segmentation/
+│   │       ├── kmeans_model.pkl
+│   │       └── scaler.pkl
+│   ├── data/
+│   │   ├── final/
+│   │   │   └── Customer_Churn_With_Recommendations.csv
+│   │   ├── processed/
+│   │   │   └── Telco_Customer_Churn_Cleaned.csv
+│   │   └── raw/
+│   │       └── Telco_Customer_Churn.csv
+│   ├── logs/
+│   │   ├── api.log
+│   │   ├── error.log
+│   │   └── prediction.log
+│   ├── notebook/
+│   │   ├── 01_data_understanding.ipynb
+│   │   ├── 02_Data_Cleaning.ipynb
+│   │   ├── 03_Exploratory_Data_Analysis.ipynb
+│   │   ├── 04_Feature_Engineering.ipynb
+│   │   ├── 05_Customer_Segmentation.ipynb
+│   │   ├── 06_Model_Training.ipynb
+│   │   ├── 07_Model_Evaluation.ipynb
+│   │   ├── 08_Recommendation_Engine.ipynb
+│   │   └── catboost_info/
+│   ├── reports/
+│   │   ├── Customer_Segmentation_Report.md
+│   │   ├── Recommendation_Engine_Report.md
+│   │   ├── Dataset_Summary.md
+│   │   ├── EDA_Report.md
+│   │   └── prediction_history.csv
+│   ├── docs/
+│   │   ├── API_Documentation.md
+│   │   ├── Authentication_Documentation.md
+│   │   ├── CHANGELOG.md
+│   │   ├── Dashboard_Documentation.md
+│   │   ├── Data_Dictionary.md
+│   │   ├── Installation_Guide.md
+│   │   ├── Logging_Monitoring.md
+│   │   ├── Model_Documentation.md
+│   │   ├── project_status.md
+│   │   └── User_Guide.md
+│   ├── .env
+│   ├── .gitignore
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── docker-compose.yml
 │
-├── .env                          # Environment variables
-├── .gitignore                    # Git ignore file
-├── Customer Churn Prediction & Recommendation System.pdf
-├── LICENSE                       # MIT License
-├── README.md                     # Project documentation
-├── requirements.txt              # Project dependencies
-└── ROADMAP.md                    # Development roadmap
+├── Customer_Churn_API.postman_collection.json
+├── LICENSE
+├── README.md
+└── ROADMAP.md
 ```
 
 ---
 
-# Machine Learning Workflow
+## Machine Learning Workflow
 
 ```
 Dataset
@@ -309,7 +321,7 @@ API Authentication
 Logging & Monitoring
      │
      ▼
-Interactive Dashboard
+React Dashboard
      │
      ▼
 Docker Deployment
@@ -320,7 +332,7 @@ Cloud Deployment
 
 ---
 
-# Machine Learning Models
+## Machine Learning Models
 
 The following Machine Learning algorithms were trained and evaluated to predict customer churn.
 
@@ -336,7 +348,7 @@ Each model was trained using the same preprocessed dataset and evaluated using s
 
 ---
 
-# Model Performance
+## Model Performance
 
 | Model | Accuracy | Precision | Recall | F1 Score |
 |-------|---------:|----------:|-------:|---------:|
@@ -350,15 +362,15 @@ Each model was trained using the same preprocessed dataset and evaluated using s
 
 ---
 
-# Best Model
+## Best Model
 
-## Logistic Regression
+### Logistic Regression
 
-### Why was Logistic Regression Selected?
+#### Why was Logistic Regression Selected?
 
 Although Gradient Boosting achieved the highest accuracy, **Logistic Regression** was selected as the final production model because it provided the best overall balance between performance and efficiency.
 
-### Selection Reasons
+#### Selection Reasons
 
 - Highest F1 Score
 - Highest Recall among the top-performing models
@@ -372,17 +384,15 @@ The trained model has been serialized using **Joblib** and is loaded directly by
 
 ---
 
-# Customer Segmentation
+## Customer Segmentation
 
 Customer segmentation was performed using **K-Means Clustering** to group customers with similar behavioral patterns.
 
 ### Cluster Selection Methods
-
 - Elbow Method
 - Silhouette Score
 
 ### Final Number of Clusters
-
 **4 Clusters**
 
 ### Customer Segments
@@ -406,7 +416,7 @@ The trained clustering model and scaler were saved for future predictions.
 
 ---
 
-# Recommendation Engine
+## Recommendation Engine
 
 The project includes a rule-based recommendation engine that generates personalized retention strategies based on customer characteristics.
 
@@ -437,28 +447,28 @@ Each prediction generates recommendations dynamically based on the customer's pr
 
 ---
 
-# REST API
+## REST API
 
 The application exposes prediction services through a **FastAPI** REST API.
 
----
-
-## Available Endpoints
+### Available Endpoints
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
 | GET | `/` | API Status |
 | GET | `/health` | Health Check |
 | POST | `/predict` | Customer Churn Prediction |
+| GET | `/history` | Get Prediction History |
+| GET | `/history/count` | Get History Count |
+| GET | `/history/latest` | Get Latest Prediction |
+| DELETE | `/history/{id}` | Delete Prediction |
 
 ### Swagger Documentation
-
 ```text
 http://127.0.0.1:8000/docs
 ```
 
 ### ReDoc Documentation
-
 ```text
 http://127.0.0.1:8000/redoc
 ```
@@ -469,29 +479,30 @@ http://127.0.0.1:8000/redoc
 - Churn Probability
 - Customer Segmentation
 - Personalized Recommendations
+- Prediction History
 - JSON Responses
 - Interactive API Documentation
 
 ---
 
-# API Authentication
+## API Authentication
 
 The REST API is protected using **API Key Authentication**.
 
-### Protected Endpoint
+### Protected Endpoints
 
 | Method | Endpoint |
 | ------- | -------- |
 | POST | `/predict` |
+| GET | `/history` |
+| DELETE | `/history/{id}` |
 
 ### Required Header
-
 ```text
 x-api-key
 ```
 
 ### Development API Key
-
 ```text
 customer_churn_ml_api_2026
 ```
@@ -499,7 +510,6 @@ customer_churn_ml_api_2026
 The API key is stored securely inside the `.env` file and verified before processing prediction requests.
 
 Unauthorized requests return:
-
 ```http
 401 Unauthorized
 ```
@@ -508,12 +518,11 @@ Swagger UI also supports API key authentication through the **Authorize** button
 
 ---
 
-# Logging & Monitoring
+## Logging & Monitoring
 
 The project includes a production-ready logging system to monitor API usage and simplify debugging.
 
 ### Log Files
-
 ```text
 logs/
 ├── api.log
@@ -522,9 +531,7 @@ logs/
 ```
 
 ### API Logger
-
 Records:
-
 - HTTP Method
 - Endpoint
 - Status Code
@@ -532,18 +539,14 @@ Records:
 - Processing Time
 
 ### Prediction Logger
-
 Records:
-
 - Prediction Result
 - Churn Probability
 - Customer Segment
 - Generated Recommendations
 
 ### Error Logger
-
 Records:
-
 - Runtime Errors
 - Exception Messages
 - Stack Traces
@@ -552,44 +555,48 @@ This logging system helps monitor API activity and troubleshoot issues efficient
 
 ---
 
-# Business Dashboard
+## React Dashboard
 
-The project includes an interactive **Streamlit Business Dashboard** designed for business users and decision-makers.
+The project includes an interactive **React Dashboard** designed for business users and decision-makers.
 
-## Dashboard Modules
+### Dashboard Features
 
-### Home Dashboard
+- **Customer Prediction Form** - Input customer data for real-time predictions
+- **Prediction Result** - Display prediction, probability, and recommendations
+- **Dashboard Cards** - Key business KPIs (Total Customers, Churn Rate, etc.)
+- **Prediction History** - View all previous predictions with pagination
+- **Export CSV** - Download prediction history as CSV file
+- **Delete Prediction** - Remove individual predictions
+- **View Prediction** - View detailed prediction results
+- **Pie Chart** - Churn distribution visualization
+- **Cluster Chart** - Customer segmentation visualization
+- **Pagination** - Navigate through prediction history
+- **Responsive UI** - Works on desktop and mobile devices
 
+### Dashboard Pages
+
+#### Home Dashboard
 Displays key business KPIs including:
-
 - Total Customers
 - Churn Rate
 - Retention Rate
 - High-Risk Customers
 - Customer Segments
 - Model Accuracy
+- Recent Predictions
 
----
-
-### Analytics Dashboard
-
+#### Analytics Dashboard
 Provides interactive visualizations such as:
-
-- Churn Distribution
+- Churn Distribution (Pie Chart)
+- Customer Segmentation (Cluster Chart)
 - Contract Type Analysis
 - Monthly Charges Distribution
 - Customer Tenure Analysis
-- Customer Segmentation Analysis
-- Correlation Heatmap
 
----
-
-### Prediction Dashboard
-
+#### Prediction Dashboard
 Allows users to perform real-time churn prediction by entering customer information.
 
 The dashboard displays:
-
 - Churn Prediction
 - Churn Probability
 - Probability Gauge
@@ -604,7 +611,7 @@ The dashboard communicates with the trained Machine Learning model and recommend
 
 ---
 
-# Completed Features
+## Completed Features
 
 - Project Setup
 - Dataset Validation
@@ -617,7 +624,15 @@ The dashboard communicates with the trained Machine Learning model and recommend
 - Best Model Selection
 - Recommendation Engine
 - FastAPI REST API
-- Interactive Streamlit Dashboard
+- Interactive React Dashboard
+- Prediction History
+- CSV Export
+- Dashboard Analytics
+- Pagination
+- Delete Prediction
+- Prediction Statistics
+- Charts & Visualization
+- PostgreSQL Integration
 - API Key Authentication
 - API Request Logging
 - Prediction Logging
@@ -627,17 +642,17 @@ The dashboard communicates with the trained Machine Learning model and recommend
 
 ---
 
-# Upcoming Features
+## Upcoming Features
 
 - Docker Containerization
-- Postman Collection
+- Docker Compose
 - Cloud Deployment
 - Final Documentation
 - Final Presentation
 
 ---
 
-# Project Progress
+## Project Progress
 
 | Phase | Status |
 | ----------------------------- | -------------- |
@@ -650,111 +665,149 @@ The dashboard communicates with the trained Machine Learning model and recommend
 | Model Training | ✅ Completed |
 | Model Evaluation | ✅ Completed |
 | Recommendation Engine | ✅ Completed |
-| REST API Development | ✅ Completed |
-| Dashboard Development | ✅ Completed |
+| FastAPI API | ✅ Completed |
+| PostgreSQL Integration | ✅ Completed |
+| React Frontend | ✅ Completed |
+| Prediction History | ✅ Completed |
+| Dashboard Analytics | ✅ Completed |
+| CSV Export | ✅ Completed |
 | Authentication | ✅ Completed |
 | Logging & Monitoring | ✅ Completed |
-| Docker Containerization | ⏳ Pending |
-| Documentation | 🟡 In Progress |
-| Postman Collection | ⏳ Pending |
+| Docker Containerization | 🟡 In Progress |
+| Docker Compose | 🟡 In Progress |
 | Cloud Deployment | ⏳ Pending |
-| Final Presentation | ⏳ Pending |
+| Final Documentation | 🟡 In Progress |
 
 ---
 
-# Installation
+## Installation
 
-## Clone Repository
-
+### Clone Repository
 ```bash
 git clone https://github.com/muhammadismail040/Customer_Churn_Prediction_System.git
 ```
 
-## Move to Project Folder
-
+### Move to Project Folder
 ```bash
 cd Customer_Churn_Prediction_System
 ```
 
-## Create Virtual Environment
+### Backend Setup
 
+#### Create Virtual Environment
 ```bash
 python -m venv .venv
 ```
 
-## Activate Virtual Environment
+#### Activate Virtual Environment
 
-### Windows
-
+**Windows**
 ```bash
 .\.venv\Scripts\activate
 ```
 
-### Linux / macOS
-
+**Linux / macOS**
 ```bash
 source .venv/bin/activate
 ```
 
-## Install Dependencies
-
+#### Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
 ---
 
-# Running the Project
+## Running the Project
 
-## Run Jupyter Notebook
+### Backend
+```bash
+uvicorn src.api.routes:app --reload
+```
 
+API URL
+```text
+http://127.0.0.1:8000
+```
+
+Swagger UI
+```text
+http://127.0.0.1:8000/docs
+```
+
+ReDoc
+```text
+http://127.0.0.1:8000/redoc
+```
+
+### Frontend
+```bash
+cd frontend
+npm run dev
+```
+
+Dashboard URL
+```text
+http://localhost:5173
+```
+
+### Run Jupyter Notebook
 ```bash
 jupyter notebook
 ```
 
 ---
 
-## Run FastAPI
+## Docker
 
+### Build Image
 ```bash
-uvicorn src.api.routes:app --reload
+docker build -t churn-backend .
 ```
 
-API URL
-
-```text
-http://127.0.0.1:8000
+### Run Container
+```bash
+docker run -d -p 8000:8000 churn-backend
 ```
 
-Swagger UI
-
-```text
-http://127.0.0.1:8000/docs
+### Docker Compose
+```bash
+docker compose up --build
 ```
 
-ReDoc
-
-```text
-http://127.0.0.1:8000/redoc
-```
+This will start both the backend and PostgreSQL database containers.
 
 ---
 
-## Run Streamlit Dashboard
+## Postman Collection
 
-```bash
-streamlit run dashboard/app.py
-```
-
-Dashboard URL
-
+### Import
 ```text
-http://localhost:8501
+Customer_Churn_API.postman_collection.json
 ```
+
+### Available APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/predict` | Make a prediction |
+| GET | `/history` | Get all predictions |
+| GET | `/history/count` | Get prediction count |
+| GET | `/history/latest` | Get latest prediction |
+| DELETE | `/history/{id}` | Delete a prediction |
+
+All endpoints (except `/` and `/health`) require API Key Authentication.
 
 ---
 
-# Future Improvements
+## Future Improvements
 
 The project can be further enhanced by implementing:
 
@@ -763,7 +816,6 @@ The project can be further enhanced by implementing:
 - Explainable AI using SHAP
 - LIME Model Explanations
 - User Authentication
-- Logging & Monitoring
 - CI/CD Pipeline
 - Automatic Model Retraining
 - Real-Time Prediction Pipeline
@@ -773,23 +825,23 @@ The project can be further enhanced by implementing:
 
 ---
 
-# Overall Progress
+## Overall Progress
 
 ```text
-██████████████████████████████░░░░
+███████████████████████████████████░
 
-90% Complete
+97% Complete
 ```
 
-The project has successfully completed the complete Machine Learning pipeline, including customer segmentation, model training, model evaluation, recommendation engine, REST API development, API authentication, logging and monitoring, and an interactive business dashboard.
+The project has successfully completed the complete Machine Learning pipeline, including customer segmentation, model training, model evaluation, recommendation engine, REST API development, API authentication, logging and monitoring, PostgreSQL integration, and an interactive React dashboard.
 
-The remaining work focuses on deployment and final documentation.
+The remaining work focuses on Docker containerization and cloud deployment.
 
 ---
 
-# Deliverables
+## Deliverables
 
-## Completed Deliverables
+### Completed Deliverables
 
 - Complete Source Code
 - GitHub Repository
@@ -799,26 +851,29 @@ The remaining work focuses on deployment and final documentation.
 - Customer Segmentation Model
 - Recommendation Engine
 - FastAPI REST API
-- Interactive Streamlit Dashboard
+- Interactive React Dashboard
+- Prediction History
+- Dashboard Analytics
+- CSV Export
+- PostgreSQL Integration
 - API Key Authentication
 - Logging & Monitoring
-- API Documentation
+- Swagger Documentation
+- ReDoc Documentation
 - README Documentation
 - ROADMAP
-
----
-
-## Remaining Deliverables
-
-- Docker Configuration
 - Postman Collection
+
+### Remaining Deliverables
+
+- Docker Image
+- Docker Compose
 - Cloud Deployment
-- Final Documentation
-- Final Presentation
+- Final Deployment Links
 
 ---
 
-# Documentation
+## Documentation
 
 The project includes the following documentation.
 
@@ -839,55 +894,23 @@ The project includes the following documentation.
 
 ---
 
-# Repository
+## Author
 
-```text
-Customer_Churn_Prediction_System
-│
-├── dashboard/
-├── src/
-├── notebook/
-├── models/
-├── docs/
-├── reports/
-├── data/
-├── logs/
-├── tests/
-│
-├── .env
-├── .gitignore
-├── README.md
-├── ROADMAP.md
-├── requirements.txt
-├── LICENSE
-└── Customer Churn Prediction & Recommendation System.pdf
-```
-
----
-
-# Author
-
-## Muhammad Ismail
+### Muhammad Ismail
 
 **Machine Learning Engineer Intern**
 
 University of Engineering & Technology (UET) Mardan
 
----
-
 ### GitHub
-
 https://github.com/muhammadismail040
 
----
-
 ### LinkedIn
-
 https://www.linkedin.com/in/muhammad-ismail-913ab6322/
 
 ---
 
-# Acknowledgements
+## Acknowledgements
 
 This project was developed as part of a Machine Learning Engineering Internship to demonstrate the complete lifecycle of a production-ready Machine Learning application.
 
@@ -896,13 +919,13 @@ Special thanks to:
 - IBM for the Telco Customer Churn Dataset
 - Scikit-learn Community
 - FastAPI Community
-- Streamlit Community
+- React Community
 - XGBoost, LightGBM, and CatBoost Developers
 - Open Source Contributors
 
 ---
 
-# License
+## License
 
 This project is licensed under the **MIT License**.
 

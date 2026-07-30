@@ -1,6 +1,6 @@
 # 🗺️ Customer Churn Prediction & Recommendation System Roadmap
 
-This roadmap outlines the complete development lifecycle of the project, from data collection to deployment. It also serves as a project tracker during the Machine Learning Engineering Internship.
+This roadmap outlines the complete development lifecycle of the **Customer Churn Prediction & Recommendation System**, from project setup to cloud deployment. It serves as a development tracker and progress report during the Machine Learning Engineering Internship.
 
 ---
 
@@ -18,11 +18,11 @@ This roadmap outlines the complete development lifecycle of the project, from da
 | Phase 8 | Model Evaluation | ✅ Completed |
 | Phase 9 | Recommendation Engine | ✅ Completed |
 | Phase 10 | REST API Development | ✅ Completed |
-| Phase 11 | Business Dashboard Development | ✅ Completed |
+| Phase 11 | React Dashboard Development | ✅ Completed |
 | Phase 12 | Documentation | 🟡 In Progress |
-| Phase 13 | Authentication | ⏳ Pending |
-| Phase 14 | Logging & Monitoring | ⏳ Pending |
-| Phase 15 | Docker Containerization | ⏳ Pending |
+| Phase 13 | Authentication | ✅ Completed |
+| Phase 14 | Logging & Monitoring | ✅ Completed |
+| Phase 15 | Docker Containerization | ✅ Completed |
 | Phase 16 | Cloud Deployment | ⏳ Pending |
 | Phase 17 | Final Presentation | ⏳ Pending |
 
@@ -34,9 +34,10 @@ This roadmap outlines the complete development lifecycle of the project, from da
 
 - Project Folder Structure
 - Virtual Environment
-- Required Libraries
+- Required Python Libraries
 - GitHub Repository
 - Dataset Collection
+- Development Environment Setup
 
 ---
 
@@ -80,12 +81,11 @@ This roadmap outlines the complete development lifecycle of the project, from da
 
 - Feature Selection
 - Train-Test Split
-- Target Encoding
 - One-Hot Encoding
 - Feature Scaling
 - ColumnTransformer Pipeline
 - Saved Preprocessing Pipeline
-- Saved Target Encoder
+- Saved Feature Encoder
 
 ---
 
@@ -94,18 +94,17 @@ This roadmap outlines the complete development lifecycle of the project, from da
 - K-Means Clustering
 - Elbow Method
 - Silhouette Score
-- Selected Optimal Clusters (K=4)
+- Selected Optimal Clusters (K = 4)
 - Customer Cluster Assignment
 - Cluster Profiling
 - Cluster Visualization
-- Saved K-Means Model
-- Saved Scaler
+- Saved Segmentation Model
 
 ---
 
 ## Phase 7 — Model Training
 
-Models Trained:
+### Models Trained
 
 - Logistic Regression
 - Decision Tree
@@ -128,9 +127,8 @@ Models Trained:
 - ROC Curve
 - Best Model Selection
 - Model Serialization
-- Saved Final Model
 
-Selected Model:
+### Final Selected Model
 
 - Logistic Regression
 
@@ -140,8 +138,8 @@ Selected Model:
 
 - Rule-Based Recommendation System
 - Customer-Specific Retention Strategies
+- Personalized Business Recommendations
 - Recommendation Module
-- Business Recommendations
 - API Integration
 - Dashboard Integration
 
@@ -149,51 +147,82 @@ Selected Model:
 
 ## Phase 10 — REST API Development
 
+Built using **FastAPI**
+
+### Features
+
 - FastAPI Project Structure
 - Model Loader
-- Request Validation using Pydantic
+- Request Validation (Pydantic)
 - Home Endpoint
-- Health Check Endpoint
+- Health Endpoint
 - Prediction Endpoint
 - Customer Segmentation Integration
 - Recommendation Engine Integration
+- PostgreSQL Integration
+- Prediction History API
+- Delete Prediction API
+- Prediction Count API
 - JSON Responses
 - Swagger Documentation
 - ReDoc Documentation
 
 ---
 
-## Phase 11 — Business Dashboard Development
+## Phase 11 — React Dashboard Development
 
-Built using **Streamlit**.
+Built using **React.js + Bootstrap**
 
-### Home Dashboard
+### Dashboard Features
 
-- Total Customers
-- Churn Rate
-- Retention Rate
-- High-Risk Customers
-- Customer Segments
-- Model Accuracy
-
-### Analytics Dashboard
-
-- Churn Distribution
-- Contract Analysis
-- Monthly Charges Analysis
-- Customer Segmentation Charts
-- Correlation Heatmap
-
-### Prediction Dashboard
-
-- Customer Input Form
+- Home Dashboard
+- Customer Prediction Form
 - Real-Time Prediction
-- Churn Probability Gauge
-- Customer Segment Detection
+- Churn Probability
+- Customer Segmentation
 - Risk Assessment
 - Personalized Recommendations
-- Business Insights
 - Prediction History
+- Pagination
+- CSV Export
+- Responsive User Interface
+- API Integration
+
+---
+
+## Phase 13 — Authentication
+
+### Completed Features
+
+- API Key Authentication
+- Protected Prediction Endpoint
+- Swagger Authorization
+- Secure Request Validation
+
+---
+
+## Phase 14 — Logging & Monitoring
+
+### Completed Features
+
+- API Request Logging
+- Prediction Logging
+- Error Logging
+- SQLAlchemy Logging
+- Application Monitoring
+
+---
+
+## Phase 15 — Docker Containerization
+
+### Completed Features
+
+- Dockerfile
+- Docker Compose
+- Docker Image Creation
+- Docker Container Execution
+- Swagger Running Inside Docker
+- Local Container Testing
 
 ---
 
@@ -201,60 +230,36 @@ Built using **Streamlit**.
 
 ## Phase 12 — Documentation
 
-Currently in progress.
+Currently completing project documentation.
 
-Documents being prepared:
+Documents
 
 - README.md
 - ROADMAP.md
 - API Documentation
-- Dashboard Documentation
 - Model Documentation
-- Installation Guide
+- Data Dictionary
 - User Guide
-
----
-
-## Phase 13 — Authentication
-
-Planned Features
-
-- API Key Authentication
-- Protected Endpoints
-- Secure Access
-
----
-
-## Phase 14 — Logging & Monitoring
-
-Planned Features
-
-- API Request Logging
-- Error Logging
-- Prediction Logs
-- Monitoring Dashboard
-
----
-
-## Phase 15 — Docker Containerization
-
-Planned Features
-
-- Dockerfile
-- Docker Compose
-- Production Configuration
-- Container Testing
+- Installation Guide
+- Docker Guide
+- Deployment Guide
+- Postman Guide
+- Logging Guide
+- Contributing Guide
 
 ---
 
 ## Phase 16 — Cloud Deployment
 
-Planned Features
+### Planned Tasks
 
-- Deploy FastAPI
-- Deploy Streamlit Dashboard
-- Public API
-- Production URL
+- Deploy FastAPI Backend
+- Deploy React Frontend
+- Configure Environment Variables
+- Connect PostgreSQL Database
+- Generate Public API URL
+- Generate Public Frontend URL
+- Final Production Testing
 
 ---
 
@@ -263,6 +268,7 @@ Planned Features
 Presentation Topics
 
 - Project Overview
+- Problem Statement
 - Dataset
 - Data Cleaning
 - Exploratory Data Analysis
@@ -272,19 +278,66 @@ Presentation Topics
 - Model Evaluation
 - Recommendation Engine
 - REST API
-- Business Dashboard
+- PostgreSQL
+- React Dashboard
+- Docker
+- Cloud Deployment
 - Results
 - Challenges
 - Future Improvements
 
 ---
 
+# 📊 Project Workflow
+
+```text
+Dataset
+   │
+   ▼
+Data Cleaning
+   │
+   ▼
+Exploratory Data Analysis
+   │
+   ▼
+Feature Engineering
+   │
+   ▼
+Customer Segmentation
+   │
+   ▼
+Model Training
+   │
+   ▼
+Model Evaluation
+   │
+   ▼
+Recommendation Engine
+   │
+   ▼
+FastAPI REST API
+   │
+   ▼
+PostgreSQL Database
+   │
+   ▼
+React Dashboard
+   │
+   ▼
+Docker
+   │
+   ▼
+Cloud Deployment
+```
+
+---
+
 # 📊 Overall Progress
 
 ```text
-████████████████████████████░░
+██████████████████████████████░
 
-92% Complete
+98% Complete
 ```
 
 ---
@@ -292,32 +345,78 @@ Presentation Topics
 # 🎯 Remaining Deliverables
 
 - Complete Documentation
-- Authentication
-- Logging & Monitoring
-- Docker Configuration
 - Cloud Deployment
-- Postman Collection
-- Deployment Link
+- Live Backend URL
+- Live Frontend URL
 - Final Presentation
 
 ---
 
 # 📅 Current Focus
 
-**Phase 12 — Documentation**
+### Current Work
 
-Current documentation includes:
+- Completing Professional Documentation
+- Preparing Cloud Deployment
+- Deployment Testing
+- Final Project Polishing
 
-- README.md
-- ROADMAP.md
+### Next Milestone
 
-Upcoming documentation:
+🚀 Deploy Backend & Frontend to the Cloud
 
-- API Documentation
-- Dashboard Documentation
-- Model Documentation
-- Installation Guide
-- User Guide
+---
+
+# 🛠️ Technology Stack
+
+### Machine Learning
+
+- Scikit-learn
+- XGBoost
+- LightGBM
+- CatBoost
+
+### Backend
+
+- FastAPI
+- SQLAlchemy
+- PostgreSQL
+
+### Frontend
+
+- React.js
+- Bootstrap
+- Axios
+
+### Data Processing
+
+- Pandas
+- NumPy
+
+### Visualization
+
+- Matplotlib
+- Seaborn
+- Plotly
+
+### Deployment
+
+- Docker
+- Docker Compose
+- Render (Planned)
+- Vercel (Planned)
+
+---
+
+# 👨‍💻 Author
+
+**Muhammad Ismail**
+
+Machine Learning Engineer Intern
+
+BS Computer Science
+
+University of Engineering & Technology (UET) Mardan
 
 ---
 
