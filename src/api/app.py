@@ -22,12 +22,7 @@ from src.utils.logger import api_logger
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Create database tables when FastAPI starts.
-    """
-
     create_tables()
-
     yield
 
 
@@ -43,8 +38,7 @@ Customer Churn Prediction & Recommendation System
 
 A production-ready Machine Learning REST API built with FastAPI.
 
-## Features
-
+Features
 - Customer Churn Prediction
 - Churn Probability Estimation
 - Customer Segmentation
@@ -53,12 +47,7 @@ A production-ready Machine Learning REST API built with FastAPI.
 - Interactive Swagger Documentation
 - ReDoc Documentation
 
-## Authentication
-
-Click the **Authorize** button and enter your API Key.
-
 API Key:
-
 customer_churn_ml_api_2026
 """,
     version="1.1.0",
@@ -71,6 +60,19 @@ customer_churn_ml_api_2026
     },
 )
 
+
+# ============================================================
+# Root Endpoint (Health Check)
+# ============================================================
+
+@app.get("/")
+async def root():
+    return {
+        "status": "success",
+        "message": "Customer Churn Prediction API is running successfully"
+    }
+
+
 # ============================================================
 # CORS Configuration
 # ============================================================
@@ -79,11 +81,13 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "https://customer-churn-prediction-system-qy6yawru8-muhammadismail.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # ============================================================
 # Include API Routes
@@ -91,16 +95,13 @@ app.add_middleware(
 
 app.include_router(router)
 
+
 # ============================================================
 # Request Logging Middleware
 # ============================================================
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
-    """
-    Log every incoming API request.
-    """
-
     start_time = time.time()
 
     response = await call_next(request)
@@ -123,7 +124,6 @@ async def log_requests(request: Request, call_next):
 # ============================================================
 
 def custom_openapi():
-
     if app.openapi_schema:
         return app.openapi_schema
 
@@ -152,9 +152,5 @@ def custom_openapi():
 
     return app.openapi_schema
 
-
-# ============================================================
-# Register Custom OpenAPI
-# ============================================================
 
 app.openapi = custom_openapi
