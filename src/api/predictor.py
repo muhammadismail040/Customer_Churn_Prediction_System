@@ -25,6 +25,93 @@ from src.utils.logger import (
 
 
 # ==========================================================
+# Helpers
+# ==========================================================
+
+def _normalize_customer_keys(customer: dict) -> dict:
+    """
+    Normalize incoming keys so case differences
+    (e.g. 'Tenure' vs 'tenure') don't break lookups.
+    Maps to the exact key names the model/pipeline expects.
+    """
+
+    expected_keys = [
+        "gender", "SeniorCitizen", "Partner", "Dependents",
+        "tenure", "PhoneService", "MultipleLines",
+        "InternetService", "OnlineSecurity", "OnlineBackup",
+        "DeviceProtection", "TechSupport", "StreamingTV",
+        "StreamingMovies", "Contract", "PaperlessBilling",
+        "PaymentMethod", "MonthlyCharges", "TotalCharges",
+    ]
+
+    # build a lowercase lookup of whatever came in
+    lower_map = {k.lower(): v for k, v in customer.items()}
+
+    normalized = {}
+    missing = []
+
+    for key in expected_keys:
+        if key.lower() in lower_map:
+            normalized[key] = lower_map[key.lower()]
+        else:
+            missing.append(key)
+
+    if missing:
+        raise ValueError(
+            f"Missing required field(s): {', '.join(missing)}"
+        )
+
+    return normalized
+
+
+def _validate_and_cast(customer: dict) -> dict:
+    """
+    Validate and cast numeric fields.
+    Raises clear, specific errors instead of
+    letting pandas/sklearn throw cryptic ones.
+    """
+
+    # tenure must be a non-negative integer
+    try:
+        tenure = int(customer["tenure"])
+    except (ValueError, TypeError):
+        raise ValueError("tenure must be a whole number.")
+
+    if tenure < 0:
+        raise ValueError("tenure cannot be negative.")
+
+    customer["tenure"] = tenure
+
+    # MonthlyCharges must be a non-negative float
+    try:
+        monthly = float(customer["MonthlyCharges"])
+    except (ValueError, TypeError):
+        raise ValueError("MonthlyCharges must be a number.")
+
+    if monthly < 0:
+        raise ValueError("MonthlyCharges cannot be negative.")
+
+    customer["MonthlyCharges"] = monthly
+
+    # TotalCharges: handle empty strings / blanks gracefully
+    total_raw = customer.get("TotalCharges", "")
+
+    if isinstance(total_raw, str) and total_raw.strip() == "":
+        # common real-world case: brand new customers have blank TotalCharges
+        customer["TotalCharges"] = 0.0
+    else:
+        try:
+            customer["TotalCharges"] = float(total_raw)
+        except (ValueError, TypeError):
+            raise ValueError("TotalCharges must be a number.")
+
+    if customer["TotalCharges"] < 0:
+        raise ValueError("TotalCharges cannot be negative.")
+
+    return customer
+
+
+# ==========================================================
 # Recommendation Engine
 # ==========================================================
 
@@ -82,6 +169,10 @@ def predict_customer(customer):
 
     try:
 
+        # normalize + validate input before touching the model
+        customer = _normalize_customer_keys(customer)
+        customer = _validate_and_cast(customer)
+
         df = pd.DataFrame([customer])
 
         X = preprocessor.transform(df)
@@ -131,10 +222,12 @@ Recommendations:
 
         return result
 
+    except ValueError as ve:
+        # validation errors: safe to show the real message to the user
+        error_logger.exception("Prediction Validation Error")
+        raise Exception(str(ve))
+
     except Exception as e:
-
+        # unexpected errors: log full traceback, still surface message
         error_logger.exception("Prediction Error")
-
-        raise Exception(
-            f"Prediction failed: {e}"
-        )
+        raise Exception(f"Prediction failed: {e}")
