@@ -62,6 +62,25 @@ customer_churn_ml_api_2026
 
 
 # ============================================================
+# CORS Configuration
+# ============================================================
+# Must be added BEFORE routes are included, and BEFORE
+# the request-logging middleware, so it applies globally.
+#
+# allow_origin_regex covers every Vercel deployment URL
+# for this project (the random subdomain changes on every
+# deploy, e.g. -qy6yawru8-, -kzch355l5-, etc.)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"https://customer-churn-prediction-system.*\.vercel\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ============================================================
 # Root Endpoint (Health Check)
 # ============================================================
 
@@ -71,22 +90,6 @@ async def root():
         "status": "success",
         "message": "Customer Churn Prediction API is running successfully"
     }
-
-
-# ============================================================
-# CORS Configuration
-# ============================================================
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://customer-churn-prediction-system-qy6yawru8-muhammadismail.vercel.app",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 # ============================================================
